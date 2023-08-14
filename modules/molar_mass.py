@@ -15,9 +15,23 @@ def molar_mass(molecule: str):
 
     errors.errorCheck(initializing_bracket_position, ending_bracket_position)
 
+    bracket_map, bracket_count = [], 0
+    for i in range(len(molecule)):
+        if i in initializing_bracket_position:
+            bracket_count += 1
+        elif i in ending_bracket_position:
+            bracket_count -= 1
+        elif not (molecule[i].isnumeric()):
+            bracket_map.append([i, bracket_count])
+
+    print(initializing_bracket_position)
+    print(ending_bracket_position)
+    print(bracket_map)
+    print(list(molecule))
 
 
 
 
 
-molar_mass("P((N4))5()5")
+
+molar_mass("P((N4))5(0)5")
