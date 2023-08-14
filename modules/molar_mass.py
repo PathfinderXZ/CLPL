@@ -1,37 +1,44 @@
 import re
 import errors
+import data
 
 
 def molar_mass(molecule: str):
-    initializing_bracket = re.finditer(string=molecule, pattern="\(")
-    ending_bracket = re.finditer(string=molecule, pattern="\)")
-    initializing_bracket_position = []
-    ending_bracket_position = []
+    errors.errorCheck(len(molecule), 0, 1)
 
-    for i in initializing_bracket:
-        initializing_bracket_position.append(i.span()[0])
-    for i in ending_bracket:
-        ending_bracket_position.append(i.span()[0])
+    molecule_origin_string = molecule
 
-    errors.errorCheck(initializing_bracket_position, ending_bracket_position)
-
-    bracket_map, bracket_count = [], 0
-    for i in range(len(molecule)):
-        if i in initializing_bracket_position:
-            bracket_count += 1
-        elif i in ending_bracket_position:
-            bracket_count -= 1
-        elif not (molecule[i].isnumeric()):
-            bracket_map.append([i, bracket_count])
-
-    print(initializing_bracket_position)
-    print(ending_bracket_position)
-    print(bracket_map)
-    print(list(molecule))
+    molecule = molecule.replace("(", " ")
+    molecule = molecule.replace(")", " ")
+    molecule = molecule.replace("[", " ")
+    molecule = molecule.replace("]", " ")
 
 
+    molecule = list(molecule)
+
+    position_counter, molecule_split = 0, []
+    while not len(molecule)-2 <= position_counter:
+        if molecule[position_counter].isupper() and molecule[position_counter+1].islower():
+            molecule_split.append(molecule[position_counter]+molecule[position_counter+1])
+            position_counter += 2
+        else:
+            molecule_split.append(molecule[position_counter])
+            position_counter += 1
+    else:
+        if len(molecule) - position_counter == 2:
+            if not molecule[-1].islower():
+                molecule_split.append(molecule[-2])
+                molecule_split.append(molecule[-1])
+            else:
+                molecule_split.append(molecule[-2] + molecule[-1])
+        elif len(molecule) - position_counter == 1:
+            molecule_split.append(molecule[-1])
+
+    del position_counter
+
+    print(molecule_origin_string)
+    print(molecule)
+    print(molecule_split)
 
 
-
-
-molar_mass("P((N4))5(0)5")
+molar_mass("CdO3Cu((Ni3))34")

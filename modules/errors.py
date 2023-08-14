@@ -1,6 +1,8 @@
 class MoleculeError(IndexError):
     pass
 
-def errorCheck(arr1, arr2):
-    if not len(arr1) == len(arr2):
+def errorCheck(n1, n2, truefalse):
+    if n1 == n2 and truefalse:
+        raise MoleculeError("Invalid molecule")
+    elif not truefalse and not n1 == n2:
         raise MoleculeError("Invalid molecule")
