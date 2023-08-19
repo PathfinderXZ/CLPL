@@ -1,4 +1,4 @@
-class MoleculeError(IndexError):
+class MoleculeError(TypeError):
     pass
 
 
@@ -7,3 +7,4 @@ def error_check(n1, n2, truefalse):
         raise MoleculeError("Invalid molecule")
     elif not truefalse and not n1 == n2:
         raise MoleculeError("Invalid molecule")
+
