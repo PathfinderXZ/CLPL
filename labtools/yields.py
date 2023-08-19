@@ -32,3 +32,6 @@ def percent_yield():
     print(f"Percent yield is {str(percent)} %")
     print()
     return percent
+
+if __name__ == "__main__":
+    percent_yield()
