@@ -1,7 +1,5 @@
 import mode
 
-__version__ = "1.1.2"
-__author__ = "Pathfinder XZ"
 
 atomic_weight = {
     "H":  1.007941, 
@@ -131,19 +129,32 @@ atomic_weight = {
 if mode.organic_chem:
     groups = {
         # bullshit
-
+        " ": "",
         "i-": "",
         "n-": "",
         "t-": "",
         "tert-": "",
         "s-": "",
         "sek-": "",
-        
+        "iso-": "",
+
+        "monohydrate": "(H2O)",
+        "dihydrate": "((H2O)2)",
+        "trihydrate": "((H2O)3)",
+        "tetrahydrate": "((H2O)4)",
+        "pentahydrate": "((H2O)5)",
+        "hexahydrate": "((H2O)6)",
+        "heptahydrate": "((H2O)7)",
+        "octahydrate": "((H2O)8)",
+        "nonahydrate": "((H2O)9)",
+        "decahydrate": "((H2O)10)",
+        "undecahydrate": "((H2O)11)",
+        "dodecahydrate": "((H2O)12)",
 
         # prefixed groups
         
         "CyHex": "(CH(CH2)5)",
-
+        
         # normal groups
 
         "Me": "(CH3)",
@@ -158,6 +169,7 @@ if mode.organic_chem:
         "Hex": "(CH3(CH2)5)",
         "Ts": "(SO2C6H4CH3)",
         "Urea": "(CON2H2)",
+        "acac": "(C5H7O2)",
             }
 
     compounds = {
@@ -168,8 +180,15 @@ if mode.organic_chem:
         "Xylene": 106.16,
         "DCM": 84.93,
         "NHS":115.09,
-        "AcN": 41.05
-            }
+        "AcN": 41.05,
+        "DMAP": 122.17,
+        "DEAD": 174.15,
+        "DEADCAT": 174.15,
+        "LDA": 107.123,
+        "Py": 79.1,
+        "LAH": 37.95,
+
+        }
 
 else:
     groups = {}

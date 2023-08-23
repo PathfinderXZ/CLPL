@@ -3,8 +3,15 @@ import errors
 import copy
 
 
-def molar_mass(molecule: str):
+def mol_mass(molecule: str):
     errors.error_check(len(molecule), 0, 1)
+    
+    if molecule in list(data.compounds.keys()):
+        return data.compounds[molecule]
+    
+    for group in list(data.groups.keys()):
+        if group in molecule:
+            molecule = molecule.replace(group, data.groups[group])
 
     def numeric_check(string: str, pos_counter: int):
         number = str(string[pos_counter])
@@ -87,11 +94,6 @@ def molar_mass(molecule: str):
         if not ((i[0] not in data.atomic_weight.keys()) or (i[0] not in bracket_val)):
             raise errors.MoleculeError("Invalid molecule")
 
-    # isolate single outside bracket
-    # multiply the inside
-    # remove bracket
-    # repeat until no brackets remain
-
     while ["_ini"] in molecule_split:
         p_counter = 0
         while len(molecule_split) > p_counter:
@@ -137,4 +139,8 @@ def molar_mass(molecule: str):
     return mol_mass
 
 if __name__ == "__main__":
-    print(mol_mass(str(input("Enter molecule:"))))
+    print()
+    print("Molar mass:")
+    print(round(mol_mass(str(input("Enter molecule: "))), 3))
+    print()    
+
