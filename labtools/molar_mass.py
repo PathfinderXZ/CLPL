@@ -139,8 +139,6 @@ def mol_mass(molecule: str):
     return mol_mass
 
 if __name__ == "__main__":
-    print()
-    print("Molar mass:")
     print(round(mol_mass(str(input("Enter molecule: "))), 3))
     print()    
 

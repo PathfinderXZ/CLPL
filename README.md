@@ -6,4 +6,8 @@ and more features will be added.
 All contributors are welcome. If you want to, feel free to create a pull request. CLPL is not yet on PyPI. It will be soon.
 
 ## Licence
-CLPL is released under the GNU GPL 3. For more information, see LICNCE.
+CLPL is released under the GNU GPL 3. For more information, see LICENSE.
+
+## Config
+In config.py, you can trigger between organic and inorganic mode. This is mainly due to some of the functional groups overlap with some elements (Ac - actinium or acetate).
+
