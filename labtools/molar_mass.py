@@ -1,7 +1,10 @@
+import sys
+
+sys.path.append(__file__[:-22] + "data")
+
 import data
 import errors
 import copy
-
 
 def mol_mass(molecule: str):
     errors.error_check(len(molecule), 0, 1)

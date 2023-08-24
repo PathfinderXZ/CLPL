@@ -1,3 +1,7 @@
+import sys, os
+
+sys.path.append(__file__[:-12] + "config")
+
 import mode
 
 
