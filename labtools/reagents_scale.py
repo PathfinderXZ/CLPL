@@ -8,7 +8,7 @@ def reagent_scale():
 		molar_mass = float(input(f"Molar mass of reagent {i}: "))
 		eq = int(input(f"Eq of reagent {i}: "))
 		print()
-		print(f"Mass of reagent {i} is {init_amount*eq*molar_mass}")
+		print(f"Mass of reagent {i} is {init_amount * eq * molar_mass}")
 		print()
 
 if __name__ == "__main__":
