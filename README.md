@@ -4,7 +4,7 @@ CLPL is a specialized script library tailored for chemists, offering essential t
 operations.
 
 ## Overview
-
+All units in CLPL are referenced to grams.
 ### Labtools
 The Labtools module contains a collection of scripts designed to automate routine laboratory tasks.
 
