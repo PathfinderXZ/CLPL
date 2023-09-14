@@ -1,7 +1,9 @@
 config/__pycache__/
-venv
+venv/
 data/__pycache__
 labtools/__pycache__
 .git
 config/.env
 .idea/
+devvenv/
+__pycache__/

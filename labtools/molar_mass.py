@@ -5,7 +5,12 @@ sys.path.append(__file__[:-22] + "data")
 import copy
 import errors
 import re
-import data
+
+import datadef
+import compounds
+import elements
+import groups
+import isotopes
 
 
 def molmass(molecule: str):
@@ -21,20 +26,23 @@ def molmass(molecule: str):
 
     errors.error_check(len(molecule), 0, 1)
     
-    for i in data.Compounds.__instances__:
-        if i.abbreviation == molecule:
-            molecule = i.formula
-    
-    for group in data.FunctGroups.__instances__:
-        if group.abbreviation in molecule:
-            molecule = molecule.replace(group.abbreviation, group.formula)
-        elif group.full_name in molecule:
+    for compound in datadef.Compounds.registry():
+        if compound.abbreviation == molecule:
+            molecule = molecule.replace(compound.abbreviation, compound.formula)
+
+    for group in datadef.FunctGroups.registry():
+        if group.full_name in molecule:
             molecule = molecule.replace(group.full_name, group.formula)
 
+    for group in datadef.FunctGroups.registry():
+        if group.abbreviation in molecule:
+            molecule = molecule.replace(group.abbreviation, group.formula)
+
+
     replace = {"(": "+",
-               ")": "-",
+               ")": "_",
                "[": "+",
-               "]": "-",
+               "]": "_",
                "[]": "",
                "()": "",
                " ": "",
@@ -55,7 +63,7 @@ def molmass(molecule: str):
 
 
 
-    errors.error_check(molecule.count("+"), molecule.count("-"), False)
+    errors.error_check(molecule.count("+"), molecule.count("_"), False)
 
     while "+" in molecule:
         p_counter = bracket_start = molecule.find("+") + 1
@@ -64,7 +72,7 @@ def molmass(molecule: str):
             if molecule[p_counter] == "+":
                 bracket_counter += 1
                 p_counter += 1
-            elif molecule[p_counter] == "-":
+            elif molecule[p_counter] == "_":
                 bracket_counter += -1
                 p_counter += 1
             else:
@@ -89,9 +97,9 @@ def molmass(molecule: str):
     checkstring = copy.copy(molecule)
 
     checkstring = checkstring.replace("+", "")
-    checkstring = checkstring.replace("-", "")
+    checkstring = checkstring.replace("_", "")
 
-    for element in data.Elements.__instances_re_search__:
+    for element in datadef.Elements.re_lookup_registry():
         if element.symbol in checkstring:
             checkstring = checkstring.replace(element.symbol, "")
 
@@ -102,7 +110,18 @@ def molmass(molecule: str):
     mol_mass = 0.0
     regex_digit = re.compile(r"\d+")
 
-    for element in data.Elements.__instances_re_search__:
+    #preemptive isotope search
+
+    # for isotope in datadef.Isotopes.registry():
+    #     if len(isotope.symbol) > 1:
+    #         regex_n = re.compile(isotope.symbol + r"\d+")
+    #         regex = re.compile(isotope.symbol)
+    #
+    #         w_numbers = re.findall(regex_n, molecule)
+    #         no_numbers = re.findall(regex, molecule)
+
+
+    for element in datadef.Elements.re_lookup_registry():
         regex_n = re.compile(element.symbol + r"\d+")
         regex = re.compile(element.symbol)
 

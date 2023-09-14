@@ -2,7 +2,7 @@ def theoretical_yield():
     molar_mass = []
     mass = []
     eq = []
-    print("All units in grams or g/mol")
+
     for i in range(1, int(input("Number of reactants: "))+1):
         mass.append(float(input("Weight of reactant " + str(i) + " used: ")))
         molar_mass.append(float(input("Molar mass of reactant " + str(i) + ": ")))
@@ -18,9 +18,7 @@ def theoretical_yield():
     theoretical = str(min(equivalent_molar_amount)*product_eq*product_molar_mass)
     print()
     print(f"Theoretical yield: {theoretical} g")
-    print()
     return float(theoretical)
-
 
 def percent_yield():
     theoretical = theoretical_yield()
@@ -35,3 +33,4 @@ def percent_yield():
 
 if __name__ == "__main__":
     percent_yield()
+
